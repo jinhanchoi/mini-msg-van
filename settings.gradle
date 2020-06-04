@@ -1,0 +1,4 @@
+rootProject.name = 'mini-msg-van'
+include 'core'
+include 'server'
+
