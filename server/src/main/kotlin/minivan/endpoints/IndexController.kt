@@ -2,6 +2,7 @@ package minivan.endpoints
 
 import kotlinx.coroutines.*
 import org.slf4j.LoggerFactory
+import org.springframework.scheduling.annotation.Async
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -13,14 +14,24 @@ import java.util.logging.Logger
 @RequestMapping("/")
 class IndexController {
     val logger : org.slf4j.Logger? = LoggerFactory.getLogger(IndexController::class.java)
-
+    @GetMapping("/index2")
+    fun index2() : Mono<String>{
+        for(i in 0 .. 1000000){
+            //println(i)
+            logger?.info("test")
+        }
+        return Mono.just("testtttt")
+    }
+    @Async
     @GetMapping()
     fun index() : Mono<String> {
-
         val mono1 : Mono<List<String>> = Mono.just(listOf("1","2","3","4"))
         val mono2 : Mono<Collection<String>> = Mono.just(listOf("a","b","c","d","e"))
         Mono.zip(mono1, mono2).map { tuple -> print("${tuple.t1} and ${tuple.t2} ")}.subscribe()
 
+        for(i in 0 .. 1000000){
+            logger?.info("{}",i)
+        }
         val name : Mono<String> = Mono.fromSupplier{
             println("called")
             //throw RuntimeException("")

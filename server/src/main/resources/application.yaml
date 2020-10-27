@@ -1,0 +1,15 @@
+spring.main.web-application-type: "REACTIVE"
+spring:
+  thymeleaf:
+    reactive:
+      max-chunk-size: 8192
+#spring.webflux.static-path-pattern: "/**"
+server:
+  port: 9999
+#  ssl:
+#    key-alias: test
+#    key-store: classpath:test.p12
+#    key-store-type: PKCS12
+#    key-store-password: jjhh1231
+#  http2:
+#    enabled: true
